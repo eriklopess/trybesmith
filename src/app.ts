@@ -1,7 +1,27 @@
 import express from 'express';
 
-const app = express();
+class App {
+  private app = express.application;
 
-app.use(express.json());
+  constructor() {
+    this.app = express();
+    this.middlewares();
+    this.routes();
+  }
 
-export default app;
+  middlewares() {
+    this.app.use(express.json());
+    this.app.use(express.urlencoded({ extended: true }));
+  }
+
+  routes() {
+  }
+
+  listen(port: number) {
+    this.app.listen(port, () => {
+      console.log(`Rodando na porta: ${port}`);
+    });
+  }
+}
+
+export default new App();
