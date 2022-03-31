@@ -1,27 +1,11 @@
 import express from 'express';
+import ProductsController from './controllers/Products.controller';
 
-class App {
-  private app = express.application;
+const controller: ProductsController = new ProductsController(); 
+const app = express();
 
-  constructor() {
-    this.app = express();
-    this.middlewares();
-    this.routes();
-  }
+app.use(express.json());
 
-  middlewares() {
-    this.app.use(express.json());
-    this.app.use(express.urlencoded({ extended: true }));
-  }
+app.get('/products', controller.findAll);
 
-  routes() {
-  }
-
-  listen(port: number) {
-    this.app.listen(port, () => {
-      console.log(`Rodando na porta: ${port}`);
-    });
-  }
-}
-
-export default new App();
+export default app;
