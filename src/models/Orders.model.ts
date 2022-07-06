@@ -8,7 +8,6 @@ class OrdersModel {
     this.connection = connection;
   }
 
-  // https://database.guide/json_arrayagg-function-in-oracle/
   async findAll() {
     const query = `SELECT DISTINCT o.id, o.userId, JSON_ARRAYAGG(p.id) as products
     FROM Trybesmith.Orders AS o INNER JOIN Trybesmith.Products AS p WHERE p.orderId = o.id
